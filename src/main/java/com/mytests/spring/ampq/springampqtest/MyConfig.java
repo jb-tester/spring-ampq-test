@@ -74,24 +74,24 @@ public class MyConfig {
     // template - to test completion
     // comment-out to run the app
 
-    @Bean
+    /*@Bean
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setExchange("my.topic1");
         rabbitTemplate.setDefaultReceiveQueue("myQueue1");     // no completion here!
         return rabbitTemplate;
-    }
+    }*/
     
     // admin
     @Bean
     public RabbitAdmin admin(ConnectionFactory connectionFactory){
         RabbitAdmin admin = new RabbitAdmin(connectionFactory);
-        TopicExchange exchange = new TopicExchange("myAdminExchange");
+        /*TopicExchange exchange = new TopicExchange("myAdminExchange");
         admin.declareExchange(exchange);
         Queue queue = new Queue("adminQueue");
         admin.declareBinding(
                 BindingBuilder.bind(queue).to(exchange).with("boo.*"));
-        /*RabbitTemplate template = new RabbitTemplate(connectionFactory);
+        RabbitTemplate template = new RabbitTemplate(connectionFactory);
         template.convertAndSend("myAdminExchange","boo.dummy", "hello dummy admin");*/
         return admin;
     }

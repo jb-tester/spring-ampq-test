@@ -27,7 +27,7 @@ public class MessageSender {
         rabbitTemplate.convertAndSend("my.topic1","foo.bar" , message);
         rabbitTemplate.convertAndSend("my.topic2","bar.bar" , message);
         rabbitTemplate.convertAndSend("my.topic2","bar.foo" , message);
-        rabbitTemplate.convertAndSend("myAdminExchange","boo.dummy" , message);
+       // rabbitTemplate.convertAndSend("myAdminExchange","boo.dummy" , message);
         
     }
 }
