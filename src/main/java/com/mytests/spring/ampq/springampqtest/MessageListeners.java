@@ -5,6 +5,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.annotation.RabbitListeners;
 import org.springframework.stereotype.Service;
 
+import static com.mytests.spring.ampq.springampqtest.MyConfig.Q2;
+
 /**
  * *******************************
  * Created by irina on 2/18/2020.
@@ -14,16 +16,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageListeners {
 
-    
-
-    @RabbitListener(queues = {"myQueue1"})
+   @RabbitListener(queues = {"myQueue1"}, group = "mygroup")
     public void receiveFromQueue1(Message message) {
+
         System.out.println("**********************************");
         System.out.println("MessageListeners.receiveFromQueue1:");
         System.out.println(message.toString());
         System.out.println("**********************************");
     }
-    @RabbitListener(queues = {"myQueue2","myQueue3"})   // navigation to queues when constants are used is incorrect
+   @RabbitListener(queues = {Q2,"myQueue3"}, group = "mygroup2")   // navigation to queues when constants are used is incorrect
     public void receiveFromQueues23(Message message) {
         System.out.println("**********************************");
         System.out.println("MessageListeners.receiveFromQueues23:");
@@ -42,7 +43,7 @@ public class MessageListeners {
         System.out.println("**********************************");
     }
     
-    @RabbitListener(admin = "admin")  // no completion
+    @RabbitListener(group = "mygroup2", queues = "myQueue7")  // no completion
     public void receiveFromQueuesAdmin(Message message) {
         System.out.println("**********************************");
         System.out.println("MessageListeners.receiveFromQueuesAdmin:");

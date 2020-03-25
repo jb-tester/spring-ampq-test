@@ -22,4 +22,24 @@ public class SpringAmpqTestApplication implements CommandLineRunner {
         SpringApplication.run(SpringAmpqTestApplication.class, args);
     }
 
+    @Autowired @Qualifier("mygroup")
+    Collection<MessageListenerContainer> mygroup;
+    @Autowired @Qualifier("mygroup2")
+    Collection<MessageListenerContainer> mygroup2;
+    @Override
+    public void run(String... args) throws Exception {
+        for (MessageListenerContainer container : mygroup) {
+            System.out.println("************************");
+            System.out.println("mygroup: "+container.toString());
+            System.out.println("************************");
+        }
+        for (MessageListenerContainer container : mygroup2) {
+            System.out.println("************************");
+            System.out.println("mygroup2: "+container.toString());
+            System.out.println("************************");
+        }
+        /*for (String name : ctx.getBeanDefinitionNames()) {
+            System.out.println(name);
+        }*/
+    }
 }
