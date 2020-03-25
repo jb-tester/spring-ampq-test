@@ -7,8 +7,15 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.MessageListenerContainer;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * *******************************
@@ -18,11 +25,19 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class MyConfig {
+    // queues:
+
     //public static final String Q1 = "myQueue1";
     public static final String Q2 = "myQueue2";
     //public static final String Q3 = "myQueue3";
+    public static final String Q4 = "myQueue4";
+    //public static final String Q6 = "myQueue6";
+
+    //topics:
+
     public static final String TOPIC_1 = "my.topic1";
     public static final String TOPIC_2 = "my.topic2";
+
 
     // exchanges:
     // to check:  use constants - from same or different class
@@ -36,7 +51,9 @@ public class MyConfig {
     public TopicExchange topic2(){
         return new TopicExchange("my.topic2");
     }
-   
+
+
+
     // queues:
     // to check: 1. use constants - from same or different class
     //           2. use same names for diff queues ?
@@ -70,7 +87,11 @@ public class MyConfig {
     public Binding bind3() {
         return BindingBuilder.bind(que3()).to(topic2()).with("bar.foo");
     }
-    
+    @Bean
+    public Binding bind4() {
+        return new Binding("myQueue7", Binding.DestinationType.QUEUE, "my.topic1","xml",null);
+
+    }
     // template - to test completion
     // comment-out to run the app
 
