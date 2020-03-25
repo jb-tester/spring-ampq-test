@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.mytests.spring.ampq</groupId>
-    <artifactId>spring-ampq-test</artifactId>
+    <artifactId>spring-amqp-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-ampq-test</name>
+    <name>spring-amqp-test</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
