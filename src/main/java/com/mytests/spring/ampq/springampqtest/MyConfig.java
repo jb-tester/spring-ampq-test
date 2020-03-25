@@ -116,4 +116,10 @@ public class MyConfig {
         template.convertAndSend("myAdminExchange","boo.dummy", "hello dummy admin");*/
         return admin;
     }
+
+
+    @Bean
+    public Collection<MessageListenerContainer> mygroup2(){
+        return new ArrayList<>();
+    }
 }
