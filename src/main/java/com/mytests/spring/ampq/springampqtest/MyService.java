@@ -43,4 +43,12 @@ public class MyService {
 
     System.out.println("------------MySpelService.processQ6-----"+message);
   }
+  @RabbitListener(bindings = @QueueBinding(
+          value = @Queue(value = "${my.queue}", durable = "true"),
+          exchange = @Exchange(value = "${my.topic}", ignoreDeclarationExceptions = "true"),
+          key = "q5"))
+  public void processQ5(Message message) {
+
+    System.out.println("------------MySpelService.processQ5-----"+message);
+  }
 }
