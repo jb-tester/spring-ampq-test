@@ -122,4 +122,22 @@ public class MyConfig {
     public Collection<MessageListenerContainer> mygroup2(){
         return new ArrayList<>();
     }
+
+    @Bean
+    public SimpleMessageListenerContainer pojoListener(ConnectionFactory connectionFactory) {
+        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
+        container.setQueueNames("myQueue1");
+        MessageListenerAdapter messageListener = new MessageListenerAdapter(new Object() {
+
+
+            public void handleMessage(Object object) {
+                System.out.println("!!!!!!!!!Got a " + object);
+
+            }
+
+        });
+
+        container.setMessageListener(messageListener);
+        return container;
+    }
 }
